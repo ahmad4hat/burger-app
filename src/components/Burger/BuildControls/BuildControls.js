@@ -4,7 +4,7 @@ import BuildControl from './BuildControl/BuildControl'
 const controls=[
    {label:'Salad', type: 'salad'},
     {label:'Meat', type: 'meat'},
-    {label:'Bacon', type: 'Bacon'},
+    {label:'Bacon', type: 'bacon'},
     {label:'Cheese', type: 'cheese'},
 ]
 const BuildControls=(props)=>
@@ -14,7 +14,10 @@ const BuildControls=(props)=>
     return (
         <div className={CssClass.BuildControls}>
         
-        {controls.map((cntr)=>(<BuildControl key={cntr.label} label={cntr.label}/>)
+        {controls.map((cntr)=>(<BuildControl 
+        key={cntr.label} 
+        label={cntr.label}
+        added={()=>props.ingredientAdded(cntr.type)}/>)
            
         )}
 
