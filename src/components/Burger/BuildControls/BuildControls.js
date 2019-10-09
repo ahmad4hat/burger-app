@@ -14,6 +14,10 @@ const BuildControls=(props)=>
     return (
         <div className={CssClass.BuildControls}>
         
+        
+        <p>The price is :<strong>{props.price.toFixed(2)}</strong> </p>
+        
+        
         {controls.map((cntr)=>(<BuildControl 
         key={cntr.label} 
         label={cntr.label}
@@ -22,11 +26,12 @@ const BuildControls=(props)=>
         disabled={props.disabled[cntr.type]}/>)
            
         )}
-
-        {/* {controls.map((cntr)=>{
-            <p>Hello</p>
-        })} */}
-    </div>);
+        <button className={CssClass.OrderButton}
+        disabled={!props.purchasable}
+        >ORDER NOW</button>
+    </div>
+    );
+    
 
 }
 
