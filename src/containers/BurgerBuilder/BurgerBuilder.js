@@ -51,6 +51,11 @@ class BurgerBuilder extends React.Component
         this.setState({purchasing:false});
 
     }
+    purchaseContinueHandler=()=>{
+        alert("you continue");
+        console.log("yu clicked the continue button");
+
+    }
 
     
 
@@ -68,7 +73,7 @@ class BurgerBuilder extends React.Component
     }
     
     removeIngredientHandler=(type)=>{
-        const oldcount =this.state.ingredient[type];
+        const oldcount =this.state.ingredient[type];    
         if (oldcount <=0 )
         {
             return ;
@@ -97,7 +102,11 @@ class BurgerBuilder extends React.Component
         return (
             <React.Fragment>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-                    <OrderSummery ingredients={this.state.ingredient}></OrderSummery>
+                    <OrderSummery 
+                    ingredients={this.state.ingredient}
+                    purchasedCancelled={this.purchaseCancelHandler}
+                    purchaseContinued={this.purchaseContinueHandler}
+                    ></OrderSummery>
                 </Modal>
                 <Burger ingredient={this.state.ingredient}></Burger>
                 
