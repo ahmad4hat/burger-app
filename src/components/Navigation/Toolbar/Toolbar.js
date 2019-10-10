@@ -12,7 +12,7 @@ const Toolbar = (props) => {
             <div className={CssClass.Logo}>
                 <Logo/>
             </div>
-            <nav>
+            <nav className={CssClass.DesktopOnly}>
                 <NavigationItems/>
             </nav>
         </header>
