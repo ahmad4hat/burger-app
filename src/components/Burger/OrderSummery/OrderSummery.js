@@ -1,12 +1,19 @@
 import React from 'react';
 import Button from '../../UI/Button/Button'
 
-const OrderSummery = (props) => {
-    const ingredientSummery= Object.keys(props.ingredients)
+class OrderSummery extends React.Component  {
+    // can be a functional component 
+    componentDidUpdate()
+    {
+        console.log("order summery :componet did update ");
+    }
+
+    render(){
+    const ingredientSummery= Object.keys(this.props.ingredients)
     .map(igkeys=> {
         return (
             <li key={igkeys}>
-                <span style={{textTransform:'capitalize'}}>{igkeys}</span>:{props.ingredients[igkeys]}
+                <span style={{textTransform:'capitalize'}}>{igkeys}</span>:{this.props.ingredients[igkeys]}
             </li>);
     });
     return (
@@ -16,13 +23,14 @@ const OrderSummery = (props) => {
             <ul>
                 {ingredientSummery}
             </ul>
-            <p><strong>Total price :{props.price.toFixed(2)}</strong></p>
+            <p><strong>Total price :{this.props.price.toFixed(2)}</strong></p>
 
             <p>Continue To Cheakout</p>
-            <Button btnType="Danger" clicked={props.purchasedCancelled}>CANCEL</Button>
-            <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button> 
+            <Button btnType="Danger" clicked={this.props.purchasedCancelled}>CANCEL</Button>
+            <Button btnType="Success" clicked={this.props.purchaseContinued}>CONTINUE</Button> 
         </React.Fragment>
     );
+    }
 }
 
 export default OrderSummery;
