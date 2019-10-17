@@ -5,6 +5,8 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
 import CssClass from './App.module.css';
 
 class App extends React.Component {
+
+
   render()
   {
     
@@ -15,8 +17,9 @@ class App extends React.Component {
   return (
       <div>
         <Layout>
-          <BurgerBuilder>  
-          </BurgerBuilder>
+          
+          <BurgerBuilder/>
+          
          
         </Layout>
       </div>
