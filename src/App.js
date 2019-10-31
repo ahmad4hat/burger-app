@@ -1,7 +1,8 @@
 import React from 'react';
-import Layout from './containers/Layout/Layout'
-import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
-import Cheakout from './containers/Checkout/Checkout'
+import Layout from './containers/Layout/Layout';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+import Cheakout from './containers/Checkout/Checkout';
+import {Route ,Switch} from 'react-router-dom'
 
 import CssClass from './App.module.css';
 
@@ -19,8 +20,13 @@ class App extends React.Component {
       <div>
         <Layout>
           
-          <BurgerBuilder/>
-          <Cheakout/>
+          {/* <BurgerBuilder/>
+          <Cheakout/> */}
+          <Switch>
+            <Route path="/checkout" component={Cheakout}/>
+            <Route path="/" exact component={BurgerBuilder}/>
+          </Switch>
+          
          
         </Layout>
       </div>
