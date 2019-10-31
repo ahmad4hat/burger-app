@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from './containers/Layout/Layout'
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
+import Cheakout from './containers/Checkout/Checkout'
 
 import CssClass from './App.module.css';
 
@@ -19,7 +20,7 @@ class App extends React.Component {
         <Layout>
           
           <BurgerBuilder/>
-          
+          <Cheakout/>
          
         </Layout>
       </div>
