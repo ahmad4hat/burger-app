@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import CheckoutSummery from '../../components/Order/CheckoutSummery/CheckoutSummery'
+import CheckoutSummery from '../../components/Order/CheckoutSummery/CheckoutSummery';
+import {Route} from 'react-router-dom';
+import ContactData from './ContactData/ContactData';
 
-export default class Checkout extends Component {
+class Checkout extends Component {
     state={
-        ingredients:{
-            salad:1,
-            cheese:1,
-            meat :1,
-            bacon :1
+        ingredients: {
+            salad: 1,
+            meat: 1,
+            cheese: 1,
+            bacon: 1
         }
     }
 
@@ -18,7 +20,17 @@ export default class Checkout extends Component {
             ingredients[param[0]] = +[param[1]];
             
         }
-         this.setState({ingredients:ingredients});
+        // console.log(ingredients);
+        console.log("this is the stuff");
+        const a= Object.keys(ingredients).sort().toString();
+        const b=Object.keys(this.state.ingredients).sort().toString();
+        console.log(a===b);
+
+
+
+        if(a===b){
+        this.setState({ingredients:ingredients});
+        }
     }
 
     checkoutContinuedHandler=()=>{
@@ -35,7 +47,10 @@ export default class Checkout extends Component {
                 onCheckoutContinued={this.checkoutContinuedHandler}
                 onCheckoutCancelled={this.checkoutCancelledHandler}
                 />
+                <Route path={this.props.match.path+'/contact-data'} component={ContactData} />
             </div>
         )
     }
 }
+
+export default Checkout;
