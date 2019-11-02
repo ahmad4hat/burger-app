@@ -56,7 +56,7 @@ export default class ContactData extends Component {
             deliveryMethod: {
                 elementType: 'select',
                 elementConfig: {
-                    option:[
+                    options:[
                         {value :'fastest', displayValue :'Fastest'},
                         {value :'cheapest', displayValue :'Cheapest'},
                     ]
