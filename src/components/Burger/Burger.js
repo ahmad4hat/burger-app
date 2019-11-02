@@ -4,8 +4,6 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 import {withRouter} from 'react-router-dom'
 
 const Burger=(props)=>{
-
-    console.log(props);
     
     let transformIngredient=Object.keys(props.ingredients)
     .map(igKey=>{
@@ -22,8 +20,6 @@ const Burger=(props)=>{
     {
         transformIngredient=<p>Please Add something</p>
     }
-    
-    console.log(transformIngredient);
     
     return(
         <div className={CssClass.Burger}>

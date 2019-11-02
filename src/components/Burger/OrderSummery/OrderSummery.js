@@ -5,7 +5,6 @@ class OrderSummery extends React.Component  {
     // can be a functional component 
     componentDidUpdate()
     {
-        console.log("order summery :componet did update ");
     }
 
     render(){

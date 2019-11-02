@@ -29,8 +29,6 @@ class Checkout extends Component {
             
             
         }
-
-        console.log(price);
       
         const a= Object.keys(ingredients).sort().toString();
         const b=Object.keys(this.state.ingredients).sort().toString();

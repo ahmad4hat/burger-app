@@ -3,7 +3,6 @@ import CssClass from './BuildControl.module.css'
 
 
 const BuildControl=(props)=>{
-    console.log(props.disabled);
    return (<div className={CssClass.BuildControl}>
         <div className={CssClass.Label}>{props.label}</div>
         <button 

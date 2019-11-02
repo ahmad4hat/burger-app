@@ -2,19 +2,28 @@ import React from 'react';
 import CssClasses from './Input.module.css';
 
 
-const Input = (props) => {
+const input = (props) => {
     
     let inputElement=null;
-    switch (props.inputtype) {
+    switch (props.elementType) {
         case ('input'):
-            inputElement=<input className={CssClasses.InputElement}  {...props}/>;
+            inputElement=<input 
+            className={CssClasses.InputElement} 
+             {...props.elementConfig} 
+             value={props.value}/>;
             break;
         case ('textarea'):
-            inputElement=<textarea className={CssClasses.InputElement} {...props} />;
+            inputElement=<textarea 
+            className={CssClasses.InputElement}
+             {...props.elementConfig} 
+             value={props.value}/>;
             break;
     
         default:
-            inputElement=<input className={CssClasses.InputElement} {...props}/>;
+            inputElement=<input 
+            className={CssClasses.InputElement} 
+            {...props.elementConfig} 
+            value={props.value}/>;
             break;
     }
     return (
@@ -25,4 +34,4 @@ const Input = (props) => {
     );
 }
 
-export default Input;
+export default input;

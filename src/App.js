@@ -17,7 +17,6 @@ class App extends React.Component {
   const a=[];
   a.push(CssClass.red);
   a.push(CssClass.bold);
-  console.log(a);
   return (
       <div>
         <Layout>

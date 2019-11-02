@@ -7,7 +7,6 @@ class Modal extends React.Component {
   
     componentDidUpdate()
     {
-        console.log("Modal updated");
     }
 
     shouldComponentUpdate(nextProps,nextState)
