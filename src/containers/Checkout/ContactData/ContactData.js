@@ -88,15 +88,14 @@ export default class ContactData extends Component {
                         {value :'cheapest', displayValue :'Cheapest'},
                     ]
                 },
-                value:""
-                // valid:true,
-                // validation:{
-                //     required :false
-                // }
+                value:"",
+                valid:true,
+                validation:{
+                }
                
             },
         },
-
+        formIsValid:false,
         loading: false
 
     }
@@ -160,7 +159,17 @@ export default class ContactData extends Component {
         updatedfromElement.touched=true;
         console.log(updatedfromElement);
         updateOderfrom[inputIdentifier]=updatedfromElement;
-        this.setState({orderFrom:updateOderfrom});
+
+        let formIsValid=true;
+        for(let inputIdentifier in updateOderfrom){
+            formIsValid=updateOderfrom[inputIdentifier].valid && formIsValid;
+        }
+
+         console.log(formIsValid);
+
+
+
+        this.setState({orderFrom:updateOderfrom ,formIsValid});
        
 
     }
@@ -191,7 +200,7 @@ export default class ContactData extends Component {
                         />
                     ))
                 }
-                <Button btnType="Success" >ORDER</Button>
+                <Button disabled={!this.state.formIsValid} btnType="Success" >ORDER</Button>
             </form>);
         if (this.state.loading) {
             form = (<Spinner />);
