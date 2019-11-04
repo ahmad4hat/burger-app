@@ -16,7 +16,11 @@ export default class ContactData extends Component {
                     type:'text',
                     placeholder :'Your Name'
                 },
-                value:""
+                value:"",
+                validation:{
+                    required :true
+                },
+                valid:false
             },
 
             street: {
@@ -25,7 +29,11 @@ export default class ContactData extends Component {
                     type:'text',
                     placeholder :'Street'
                 },
-                value:""
+                value:"",
+                validation:{
+                    required :true
+                },
+                valid:false
             },
             zip: {
                 elementType: 'input',
@@ -33,7 +41,13 @@ export default class ContactData extends Component {
                     type:'text',
                     placeholder :'ZIP-CODE'
                 },
-                value:""
+                value:"",
+                validation:{
+                    required :true,
+                    minLength:5,
+                    maxLength:5
+                },
+                valid:false
             },
             country: {
                 elementType: 'input',
@@ -41,7 +55,11 @@ export default class ContactData extends Component {
                     type:'text',
                     placeholder :'Country'
                 },
-                value:""
+                value:"",
+                validation:{
+                    required :true
+                },
+                valid:false
             },
 
             email: {
@@ -50,7 +68,11 @@ export default class ContactData extends Component {
                     type:'email',
                     placeholder :'Your Email'
                 },
-                value:""
+                value:"",
+                validation:{
+                    required :true
+                },
+                valid:false
             },
            
             deliveryMethod: {
@@ -62,6 +84,7 @@ export default class ContactData extends Component {
                     ]
                 },
                 value:""
+               
             },
         },
 
@@ -95,6 +118,26 @@ export default class ContactData extends Component {
 
     }
 
+    checkValidity=(value,rules)=>{
+        let isValid =true;
+        if(rules.required)
+        {
+            isValid=value.trim() !=='' && isValid;
+        }
+        if(rules.minLength){
+            isValid=value.length>= rules.minLength &&isValid;
+
+        }
+
+        if(rules.maxLength){
+            isValid=value.length<= rules.maxLength &&isValid;
+
+        }
+
+        return isValid;
+
+    }
+
     inputChangedHandler=(event,inputIdentifier)=>{
 
         const updateOderfrom={
@@ -104,7 +147,8 @@ export default class ContactData extends Component {
             ...updateOderfrom[inputIdentifier]
         };
         updatedfromElement.value=event.target.value;
-        
+        updatedfromElement.valid=this.checkValidity(updatedfromElement.value,updatedfromElement.validation);
+        console.log(updatedfromElement);
         updateOderfrom[inputIdentifier]=updatedfromElement;
         this.setState({orderFrom:updateOderfrom});
        
