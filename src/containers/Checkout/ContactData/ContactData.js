@@ -84,6 +84,10 @@ export default class ContactData extends Component {
                     ]
                 },
                 value:""
+                // valid:true,
+                // validation:{
+                //     required :false
+                // }
                
             },
         },
@@ -120,16 +124,16 @@ export default class ContactData extends Component {
 
     checkValidity=(value,rules)=>{
         let isValid =true;
-        if(rules.required)
+        if(rules && rules.required)
         {
             isValid=value.trim() !=='' && isValid;
         }
-        if(rules.minLength){
+        if(rules && rules.minLength){
             isValid=value.length>= rules.minLength &&isValid;
 
         }
 
-        if(rules.maxLength){
+        if(rules && rules.maxLength){
             isValid=value.length<= rules.maxLength &&isValid;
 
         }
@@ -174,6 +178,8 @@ export default class ContactData extends Component {
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
                         value={formElement.value}
+                        invalid={!formElement.config.valid}
+                        shouldValidate={formElement.config.validation}
                         changed={(event)=>this.inputChangedHandler(event,formElement.id)}
                         />
                     ))
