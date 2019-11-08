@@ -9,19 +9,12 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import axios from '../../axios-order';
 import * as actionTypes from '../../store/actions';
 
-const INGREDIENT_PRICE={
-            salad :50,
-            bacon:70,
-            cheese:80,
-            meat :90 
-};
 
 
 class BurgerBuilder extends React.Component
 {
 
     state={
-        totalPrice:100,
         purchasable :false,
         purchasing :false,
         loading :false,
@@ -79,35 +72,6 @@ class BurgerBuilder extends React.Component
     }
 
     
-
-    addIngredientHandler=(type)=>{
-        const oldcount =this.state.ingredients[type];
-        const updatedCount=oldcount+1;
-        const ingredients={
-            ...this.state.ingredients
-        }
-        ingredients[type]=updatedCount;
-        const totalPrice=INGREDIENT_PRICE[type] + this.state.totalPrice;
-        this.setState({ingredients,totalPrice});
-        this.updarePurchaseState(ingredients);
-
-    }
-    
-    removeIngredientHandler=(type)=>{
-        const oldcount =this.state.ingredients[type];    
-        if (oldcount <=0 )
-        {
-            return ;
-        }
-        const updatedCount=oldcount-1;
-        const ingredients={
-            ...this.state.ingredients
-        }
-        ingredients[type]=updatedCount;
-        const totalPrice=this.state.totalPrice-INGREDIENT_PRICE[type];
-        this.setState({ingredients,totalPrice});
-        this.updarePurchaseState(ingredients);
-    }
     render()
     {
 
@@ -133,7 +97,7 @@ class BurgerBuilder extends React.Component
                             ingredientAdded={this.props.onIngredientAdded}
                             ingredientRemoved={this.props.onIngredientRemoved}
                             disabled={disabledInfo}
-                            price={this.state.totalPrice}
+                            price={this.props.price}
                             ordered={this.purchasableHandler}
                             purchasable={this.state.purchasable}/>
                     </React.Fragment>
@@ -141,7 +105,7 @@ class BurgerBuilder extends React.Component
             
             
             orderSummery= <OrderSummery 
-                            price={this.state.totalPrice}
+                            price={this.props.price}
                             ingredients={this.props.ings}
                             purchasedCancelled={this.purchaseCancelHandler}
                             purchaseContinued={this.purchaseContinueHandler}
@@ -171,6 +135,8 @@ class BurgerBuilder extends React.Component
 const mapStateToProps= state=>{
     return {
         ings:state.ingredients,
+        price: state.totalPrice
+
 
     }
 }
