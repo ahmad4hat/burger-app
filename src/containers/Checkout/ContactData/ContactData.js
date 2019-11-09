@@ -5,6 +5,8 @@ import CssClasses from './ContactData.module.css';
 import axios from '../../../axios-order';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import * as actions from '../../../store/actions/index'  
 
  class ContactData extends Component {
 
@@ -96,14 +98,12 @@ import Input from '../../../components/UI/Input/Input';
                
             },
         },
-        formIsValid:false,
-        loading: false
+        formIsValid:false
 
     }
 
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({ loading: true });
         const formData={};
         for(let formElementIdentifier in this.state.orderFrom)
         {
@@ -117,13 +117,9 @@ import Input from '../../../components/UI/Input/Input';
             orderData: formData
 
         };
+        this.props.onOrderBurger(order);
 
-        axios.post('/orders.json', order)
-            .then(responce => {
-                this.setState({ loading: false })
-                this.props.history.push('/');
-            })
-            .catch(error => this.setState({ loading: false }));
+       
 
     }
 
@@ -158,7 +154,6 @@ import Input from '../../../components/UI/Input/Input';
         updatedfromElement.value=event.target.value;
         updatedfromElement.valid=this.checkValidity(updatedfromElement.value,updatedfromElement.validation);
         updatedfromElement.touched=true;
-        console.log(updatedfromElement);
         updateOderfrom[inputIdentifier]=updatedfromElement;
 
         let formIsValid=true;
@@ -166,7 +161,6 @@ import Input from '../../../components/UI/Input/Input';
             formIsValid=updateOderfrom[inputIdentifier].valid && formIsValid;
         }
 
-         console.log(formIsValid);
 
 
 
@@ -203,7 +197,7 @@ import Input from '../../../components/UI/Input/Input';
                 }
                 <Button disabled={!this.state.formIsValid} btnType="Success" >ORDER</Button>
             </form>);
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = (<Spinner />);
         }
 
@@ -218,9 +212,16 @@ import Input from '../../../components/UI/Input/Input';
 
 const mapStateToProps=state=>{
     return {
-        ings:state.ingredients,
-        price :state.totalPrice
+        ings:state.burgerBuilder.ingredients,
+        price :state.burgerBuilder.totalPrice,
+        loading:state.order.loading
     }
+};
+
+const mapDispatchToProps=dispatch=>{
+   return {
+    onOrderBurger : (orderData)=> dispatch(actions.purchaseBurger(orderData) )
+   }
 }
 
-export default connect(mapStateToProps)(ContactData);
+export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(ContactData,axios));
