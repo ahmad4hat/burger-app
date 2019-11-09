@@ -36,7 +36,25 @@ const reducer=(state=initialState,action )=>{
                     totalPrice:state.totalPrice - INGREDIENT_PRICE[action.ingredientName]
                 }
             break;
-    
+        
+        case actionTypes.SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients :{
+                    salad :action.ingredients.salad,
+                    bacon :action.ingredients.bacon,
+                    cheese :action.ingredients.cheese,
+                    meat:action.ingredients.meat
+                },
+                error:false
+            }
+            break;
+        case actionTypes.FETCH_INGREDIENTS_FAILED:
+            return {
+                ...state,
+                error :true
+            }
+            break;
         default:
             return state;
             break;
