@@ -16,19 +16,10 @@ class BurgerBuilder extends React.Component
 
     state={
         purchasing :false,
-        loading :false,
-        error:null
+      
     };
 
     componentDidMount(){
-        // axios.get('https://react-my-burger-d4782.firebaseio.com/ingredients.json')
-        //     .then(responce =>{
-        //         this.setState({ingredients:responce.data})
-
-        //     })
-        //     .catch(error=>{
-        //         this.setState({error:String(error)})
-        //     });
     }
 
     updatePurchaseState(ingredients)
@@ -99,10 +90,6 @@ class BurgerBuilder extends React.Component
             
         }
 
-        if(this.state.loading)
-        {
-           orderSummery= <Spinner/>;
-        }
 
 
         //console.log(disabledInfo);

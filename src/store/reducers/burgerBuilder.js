@@ -8,13 +8,10 @@ const INGREDIENT_PRICE={
 };
 
 const initialState={
-    ingredients:{
-        salad :0,
-        bacon :0,
-        cheese :0,
-        meat : 0
-    },
-    totalPrice:100
+    ingredients:null,
+    totalPrice:100,
+    error:false
+
 }
 
 const reducer=(state=initialState,action )=>{
