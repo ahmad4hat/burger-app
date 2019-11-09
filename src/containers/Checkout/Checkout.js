@@ -3,9 +3,11 @@ import {connect} from 'react-redux';
 import CheckoutSummery from '../../components/Order/CheckoutSummery/CheckoutSummery';
 import {Route ,Redirect} from 'react-router-dom';
 import ContactData from './ContactData/ContactData';
+import * as actions from '../../store/actions/index'
 
 class Checkout extends Component {
   
+
 
     checkoutContinuedHandler=()=>{
         this.props.history.replace('/checkout/contact-data');
@@ -18,8 +20,10 @@ class Checkout extends Component {
 
         let summery =(<Redirect to="/"/>)
         if(this.props.ings){
+            const purchaseRedirect=this.props.purchased ? <Redirect to="/"/>:null;
             summery=(
             <div>
+                {purchaseRedirect}
                  <CheckoutSummery ingredients={this.props.ings} 
                 onCheckoutContinued={this.checkoutContinuedHandler}
                 onCheckoutCancelled={this.checkoutCancelledHandler}
@@ -43,9 +47,15 @@ class Checkout extends Component {
 
 const mapStareToProps = state=>{
     return {
-        ings: state.burgerBuilder.ingredients
+        ings: state.burgerBuilder.ingredients,
+        purchased :state.order.purchased
 
     }
 }
 
-export default connect(mapStareToProps) (Checkout);
+const mapDispatchToProps=dispatch=>{
+    return{
+    }
+}
+
+export default connect(mapStareToProps,mapDispatchToProps) (Checkout);

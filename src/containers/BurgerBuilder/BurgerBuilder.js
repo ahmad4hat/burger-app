@@ -7,7 +7,7 @@ import OrderSummery from '../../components/Burger/OrderSummery/OrderSummery';
 import Spinner from '../../components/UI/Spinner/Spinner.js'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import axios from '../../axios-order';
-import * as burgerBuilderActions from '../../store/actions/index';
+import * as actions from '../../store/actions/index';
 
 
 
@@ -46,6 +46,7 @@ class BurgerBuilder extends React.Component
 
     }
     purchaseContinueHandler=()=>{
+        this.props.onInitPurchase();
         this.props.history.push('/checkout');
     }
 
@@ -116,11 +117,12 @@ const mapStateToProps= state=>{
     }
 }
 
-const mapDispathToProps= dispath=>{
+const mapDispathToProps= dispatch=>{
     return {
-       onIngredientAdded: (ingredientName)=>dispath(burgerBuilderActions.addIngredient(ingredientName)),
-       onIngredientRemoved: (ingredientName)=>dispath(burgerBuilderActions.removeIngredient(ingredientName)),
-       onInitIngredients :()=>dispath(burgerBuilderActions.initIngredient())
+       onIngredientAdded: (ingredientName)=>dispatch(actions.addIngredient(ingredientName)),
+       onIngredientRemoved: (ingredientName)=>dispatch(actions.removeIngredient(ingredientName)),
+       onInitIngredients :()=>dispatch(actions.initIngredient()),
+       onInitPurchase :()=>dispatch(actions.purchaseInit())
     }
 
 }
