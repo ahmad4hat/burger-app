@@ -44,8 +44,33 @@ const reducer=(state=initialState,action)=>{
                 ...state,
                 loading:false
             }
+            break;
+        
+        
+        
+        case actiontypes.FETCH_ORDERS_START:
+            return{
+                ...state,
+                loading:true
+            }
             
             break;
+        
+        case actiontypes.FETCH_ORDERS_SUCCESS:
+            return{
+                ...state,
+                orders:action.orders,
+                loading:false
+            }
+            break;
+        
+        case actiontypes.FETCH_ORDERS_FAIL:
+            return{
+                ...state,
+                loading:false
+            }
+            break;
+        
         
         default:
             return state;
