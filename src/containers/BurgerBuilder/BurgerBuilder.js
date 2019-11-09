@@ -7,7 +7,7 @@ import OrderSummery from '../../components/Burger/OrderSummery/OrderSummery';
 import Spinner from '../../components/UI/Spinner/Spinner.js'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import axios from '../../axios-order';
-import * as actionTypes from '../../store/actions';
+import * as burgerBuilderActions from '../../store/actions/index';
 
 
 
@@ -129,8 +129,8 @@ const mapStateToProps= state=>{
 
 const mapDispathToProps= dispath=>{
     return {
-       onIngredientAdded: (ingredientName)=>dispath({type: actionTypes.ADD_INGREDIENT, ingredientName:ingredientName}),
-       onIngredientRemoved: (ingredientName)=>dispath({type: actionTypes.REMOVE_INGREDIENT, ingredientName:ingredientName})
+       onIngredientAdded: (ingredientName)=>dispath(burgerBuilderActions.addIngredient(ingredientName)),
+       onIngredientRemoved: (ingredientName)=>dispath(burgerBuilderActions.removeIngredient(ingredientName))
     }
 
 }
