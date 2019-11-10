@@ -91,7 +91,7 @@ import * as actions from '../../../store/actions/index'
                         {value :'cheapest', displayValue :'Cheapest'},
                     ]
                 },
-                value:"",
+                value:'fastest',
                 valid:true,
                 validation:{
                 }

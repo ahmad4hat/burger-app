@@ -31,7 +31,7 @@ let withErrorHandler=(WrappedComponent,axios)=>{
 
         componentWillUnmount()
         {
-            console.log(this.reqIntersetter, this.resIntersetter + "done");
+            //console.log(this.reqIntersetter, this.resIntersetter + "done");
             axios.interceptors.request.eject(this.reqIntersetter);
             axios.interceptors.response.eject(this.resIntersetter);
 
