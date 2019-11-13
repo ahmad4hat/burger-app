@@ -2,7 +2,7 @@ import React from 'react';
 import CssClass from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem'
 
-const NavigationItems = (props) => {
+const navigationItems = (props) => {
     return (
        <ul className={CssClass.NavigationItems}>
            <NavigationItem link="/">
@@ -11,11 +11,15 @@ const NavigationItems = (props) => {
            <NavigationItem link="/orders">
             ORDERS
            </NavigationItem>
-           <NavigationItem link="/auth">
-            Authenticate
+           {props.isAuthenticated ? 
+            <NavigationItem link="/logout">
+            Logout
            </NavigationItem>
+            :<NavigationItem link="/auth">
+            Authenticate
+           </NavigationItem>}
        </ul>
     );
 }
 
-export default NavigationItems;
+export default navigationItems;
