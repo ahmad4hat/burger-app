@@ -11,7 +11,8 @@ const INGREDIENT_PRICE={
 const initialState={
     ingredients:null,
     totalPrice:100,
-    error:false
+    error:false,
+    building :false
 
 }
 
@@ -20,7 +21,8 @@ const addIngredient=(state,action)=>{
             const UpdatedIngredientsForAdd=updateObject(state.ingredients,updatedIngredientForAdd);
             const updatedStateForAdd={
                 ingredients:UpdatedIngredientsForAdd,
-                totalPrice:state.totalPrice + INGREDIENT_PRICE[action.ingredientName]
+                totalPrice:state.totalPrice + INGREDIENT_PRICE[action.ingredientName],
+                building:true
 
             }
             
@@ -32,7 +34,8 @@ const removeIngredient=(state,action)=>{
             const UpdatedIngredientsForRemove=updateObject(state.ingredients,updatedIngredientForRemove);
             const updatedStateForRemove={
                 ingredients:UpdatedIngredientsForRemove,
-                totalPrice:state.totalPrice - INGREDIENT_PRICE[action.ingredientName]
+                totalPrice:state.totalPrice - INGREDIENT_PRICE[action.ingredientName],
+                building:true
 
             }
             
@@ -48,7 +51,8 @@ const setIngredient=(state,action)=>{
             meat:action.ingredients.meat
         },
         totalPrice:100,
-        error:false
+        error:false,
+        building :false
     })
 }
 
