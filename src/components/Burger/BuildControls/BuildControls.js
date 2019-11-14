@@ -7,7 +7,7 @@ const controls=[
     {label:'Bacon', type: 'bacon'},
     {label:'Cheese', type: 'cheese'},
 ]
-const BuildControls=(props)=>
+const buildControls=(props)=>
 {   
    
     
@@ -29,11 +29,11 @@ const BuildControls=(props)=>
         <button className={CssClass.OrderButton}
         disabled={!props.purchasable}
         onClick={props.ordered}
-        >ORDER NOW</button>
+        >{props.isAuth? "ORDER NOW" : "SIGNIN TO CONTINUE" }</button>
     </div>
     );
     
 
 }
 
-export default BuildControls;
+export default buildControls;
