@@ -11,8 +11,8 @@ export const authStart=()=>{
 export const authSuccess=(idToken,userId)=>{
     return {
         type :actionTypes.AUTH_SUCCESS,
-        idToken,
-        userId
+        idToken:idToken,
+        userId:userId
         
     };
 };
