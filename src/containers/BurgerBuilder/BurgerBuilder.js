@@ -101,8 +101,6 @@ class BurgerBuilder extends React.Component
         }
 
 
-
-        //console.log(disabledInfo);
         return (
             <React.Fragment>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>

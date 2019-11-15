@@ -9,8 +9,6 @@ import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
 
-import CssClass from './App.module.css';
-
 
 class App extends React.Component {
 
