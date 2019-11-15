@@ -6,7 +6,8 @@ import axios from '../../../axios-order';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import * as actions from '../../../store/actions/index'  
+import * as actions from '../../../store/actions/index'  ;
+import {updateObject} from '../../../shared/utility';
 
  class ContactData extends Component {
 
@@ -146,16 +147,16 @@ import * as actions from '../../../store/actions/index'
 
     inputChangedHandler=(event,inputIdentifier)=>{
 
-        const updateOderfrom={
-            ...this.state.orderFrom
-        };
-        const updatedfromElement={ 
-            ...updateOderfrom[inputIdentifier]
-        };
-        updatedfromElement.value=event.target.value;
-        updatedfromElement.valid=this.checkValidity(updatedfromElement.value,updatedfromElement.validation);
-        updatedfromElement.touched=true;
-        updateOderfrom[inputIdentifier]=updatedfromElement;
+        
+        const updatedfromElement=updateObject(this.state.orderFrom[inputIdentifier],{
+            value:event.target.value ,
+            valid: this.checkValidity(event.target.value,this.state.orderFrom[inputIdentifier].validation),
+            touched:true
+        })
+
+        const updateOderfrom=updateObject(this.state.orderFrom,{
+            [inputIdentifier]:updatedfromElement
+        })
 
         let formIsValid=true;
         for(let inputIdentifier in updateOderfrom){
