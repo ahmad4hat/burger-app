@@ -14,7 +14,6 @@ let withErrorHandler=(WrappedComponent,axios)=>{
         // }
         
         componentWillMount(){
-            console.log("hello");
             this.reqIntersetter=axios.interceptors.request.use(req => {
                 this.setState({
                     error: null
