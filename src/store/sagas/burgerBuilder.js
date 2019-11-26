@@ -5,6 +5,7 @@ import * as actions from './../actions/index'
 import axios from 'axios';
 
 
+
 export function* initIngredientSaga(action){
    
         try {
@@ -12,6 +13,7 @@ export function* initIngredientSaga(action){
         yield put(actions.setIngredient(responce.data));
         }catch(error){ 
             yield put(actions.fetchIngredientsFailed());
+           
         }
         
 
