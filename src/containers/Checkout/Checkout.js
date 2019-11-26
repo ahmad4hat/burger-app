@@ -4,31 +4,31 @@ import CheckoutSummery from '../../components/Order/CheckoutSummery/CheckoutSumm
 import {Route ,Redirect} from 'react-router-dom';
 import ContactData from './ContactData/ContactData';
 
-class Checkout extends Component {
+const Checkout=props=>  {
   
 
 
-    checkoutContinuedHandler=()=>{
-        this.props.history.replace('/checkout/contact-data');
+    const checkoutContinuedHandler=()=>{
+        props.history.replace('/checkout/contact-data');
     }
-    checkoutCancelledHandler=()=>{
-        this.props.history.goBack();
+    const checkoutCancelledHandler=()=>{
+        props.history.goBack();
     }
 
-    render() {
+  
 
         let summery =(<Redirect to="/"/>)
-        if(this.props.ings){
-            const purchaseRedirect=this.props.purchased ? <Redirect to="/"/>:null;
+        if(props.ings){
+            const purchaseRedirect=props.purchased ? <Redirect to="/"/>:null;
             summery=(
             <div>
                 {purchaseRedirect}
-                 <CheckoutSummery ingredients={this.props.ings} 
-                onCheckoutContinued={this.checkoutContinuedHandler}
-                onCheckoutCancelled={this.checkoutCancelledHandler}
+                 <CheckoutSummery ingredients={props.ings} 
+                onCheckoutContinued={checkoutContinuedHandler}
+                onCheckoutCancelled={checkoutCancelledHandler}
                 />
                 
-                <Route path={this.props.match.path+'/contact-data'}
+                <Route path={props.match.path+'/contact-data'}
                 component={ContactData} />
             </div>
                 )
@@ -40,7 +40,7 @@ class Checkout extends Component {
               
             </div>
         )
-    }
+ 
 }
 
 
