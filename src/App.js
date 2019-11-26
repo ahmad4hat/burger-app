@@ -1,4 +1,4 @@
-import React,{Suspense} from 'react';
+import React,{Suspense,useEffect} from 'react';
 import {connect} from 'react-redux'
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
@@ -12,16 +12,18 @@ const Orders=React.lazy(()=>import('./containers/Orders/Orders'));
 const Checkout=React.lazy(()=>import('./containers/Checkout/Checkout'));
 
 
-class App extends React.Component {
+const App=props=>{
 
-  
-  componentDidMount (){
-    this.props.onTryAuthSignUp();
-  }
+  useEffect(()=>{
+    props.onTryAuthSignUp();
+  },[])
+
+  // componentDidMount (){
+    
+  // }
 
 
-  render()
-  {
+ 
     
   let routes=(
     <Switch>
@@ -31,7 +33,7 @@ class App extends React.Component {
     <Redirect to="/"/>
     </Switch>);
   
-    if(this.props.isAuthenticated){
+    if(props.isAuthenticated){
     routes=(
       <Switch>
             <Route path="/checkout" render={(props)=><Suspense fallback={<Spinner></Spinner>}><Checkout {...props} /></Suspense>}/>
@@ -52,7 +54,6 @@ class App extends React.Component {
         </Layout>
       </div>
   );
-  }
 }
 
 const mapStatetoProps=state=>{
