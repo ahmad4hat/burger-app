@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component ,useState} from 'react';
 import {connect} from 'react-redux';
 import Button from '../../../components/UI/Button/Button';
 import CssClasses from './ContactData.module.css';
@@ -9,10 +9,9 @@ import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index'  ;
 import {updateObject,checkValidity} from '../../../shared/utility';
 
- class ContactData extends Component {
+ const  ContactData =props=>  {
 
-    state = {
-        orderFrom: {
+    const[orderForm,setOrderForm] =useState({
 
             name: {
                 elementType: 'input',
@@ -98,44 +97,42 @@ import {updateObject,checkValidity} from '../../../shared/utility';
                 }
                
             },
-        },
-        formIsValid:false
+        })
+        const[formIsValid,setFormIsValid]= useState(false);
 
-    }
-
-    orderHandler = (event) => {
+    const orderHandler = (event) => {
         event.preventDefault();
         const formData={};
-        for(let formElementIdentifier in this.state.orderFrom)
+        for(let formElementIdentifier in orderForm)
         {
-            formData[formElementIdentifier] =this.state.orderFrom[formElementIdentifier].value;
+            formData[formElementIdentifier] =orderForm[formElementIdentifier].value;
 
         }
 
         const order = {
-            ingredients: this.props.ings,
-            price: this.props.price,
+            ingredients: props.ings,
+            price: props.price,
             orderData: formData,
-            userId:this.props.userId
+            userId:props.userId
 
         };
-        this.props.onOrderBurger(order,this.props.token);
+        props.onOrderBurger(order,props.token);
 
        
 
     }
 
 
-    inputChangedHandler=(event,inputIdentifier)=>{
+    const inputChangedHandler=(event,inputIdentifier)=>{
 
         
-        const updatedfromElement=updateObject(this.state.orderFrom[inputIdentifier],{
+        const updatedfromElement=updateObject(orderForm[inputIdentifier],{
             value:event.target.value ,
-            valid: checkValidity(event.target.value,this.state.orderFrom[inputIdentifier].validation),
+            valid: checkValidity(event.target.value,orderForm[inputIdentifier].validation),
             touched:true
         })
 
-        const updateOderfrom=updateObject(this.state.orderFrom,{
+        const updateOderfrom=updateObject(orderForm,{
             [inputIdentifier]:updatedfromElement
         })
 
@@ -146,24 +143,23 @@ import {updateObject,checkValidity} from '../../../shared/utility';
 
 
 
-
-        this.setState({orderFrom:updateOderfrom ,formIsValid});
+        setOrderForm(updateOderfrom);
+        setFormIsValid(formIsValid)
        
 
     }
 
-    render() {
         const formElements=[];
-        for(let key in this.state.orderFrom){
+        for(let key in orderForm){
             formElements.push({
               id:key,
-              config:this.state.orderFrom[key]
+              config:orderForm[key]
             });
         }
 
 
         let form = (
-            <form onSubmit={this.orderHandler}>
+            <form onSubmit={orderHandler}>
                 {
                     formElements.map(formElement=>(
                         <Input 
@@ -173,14 +169,14 @@ import {updateObject,checkValidity} from '../../../shared/utility';
                         value={formElement.value}
                         invalid={!formElement.config.valid}
                         shouldValidate={formElement.config.validation}
-                        changed={(event)=>this.inputChangedHandler(event,formElement.id)}
+                        changed={(event)=>inputChangedHandler(event,formElement.id)}
                         touched={formElement.config.touched}
                         />
                     ))
                 }
-                <Button disabled={!this.state.formIsValid} btnType="Success" >ORDER</Button>
+                <Button disabled={!formIsValid} btnType="Success" >ORDER</Button>
             </form>);
-        if (this.props.loading) {
+        if (props.loading) {
             form = (<Spinner />);
         }
 
@@ -190,7 +186,7 @@ import {updateObject,checkValidity} from '../../../shared/utility';
                 {form}
             </div>
         )
-    }
+    
 }
 
 const mapStateToProps=state=>{
